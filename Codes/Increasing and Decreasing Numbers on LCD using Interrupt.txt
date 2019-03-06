@@ -1,0 +1,24 @@
+#include<avr/io.h>
+#include<util/delay.h>
+#include<avr/interrupt.h>
+#include<timer.h>
+#include<lcd.h>
+int i=0;
+ISR(INT0_vect)
+{ i++;
+ } 
+ ISR(INT1_vect)
+ { i--;}
+void main()
+{ DDRD=0;
+  PORTD=0xff;
+  DDRC=0xff;
+   int0_re_init(); 
+   int1_re_init();
+   lcd_init();   
+   while(1)
+   {
+     dis_cmd(0x8f);
+	 dis_number(i);
+	 }
+}

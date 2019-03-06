@@ -1,0 +1,34 @@
+#include<avr/io.h>
+#include<util/delay.h>
+#include<lcd.h>
+void main()
+{ char i,p,j;
+DDRC=0b11111111;
+ lcd_init();
+ while(1)
+ { dis_cmd(0x83);
+   dis_data('C');
+   dis_data('H');
+   dis_data('I');
+   dis_data('R');
+   dis_data('A');
+   dis_data('N');
+   dis_data('J');
+   dis_data('E');
+   dis_data('E');
+   dis_data('B');
+   dis_cmd(0xc2);
+   dis_data('2');
+   dis_data('3');
+   dis_data(' ');
+   dis_data('J');
+   dis_data('U');
+   dis_data('L');
+   dis_data('Y');
+   dis_data(' ');
+   dis_data('1');
+   dis_data('9');
+   dis_data('9');
+   dis_data('8');
+}
+}

@@ -1,0 +1,23 @@
+#include<avr/io.h>
+#include<util/delay.h>
+#include<lcd.h>
+void main()
+{ int x;
+DDRC=0b11111111;
+DDRB=0b11111111;
+  lcd_init();
+  adc_init();
+while(1)
+{x=adc_read(0);
+ dis_cmd(0x8f);
+  dis_number(x/2);
+  if((x/2)>27)
+  { PORTC|=(1<<3);
+    PORTB=(PORTB|(1<<0));
+	PORTB=(PORTB&~(1<<2));}
+  else
+  { PORTC&=~(1<<3);
+  PORTB=(PORTB|(1<<2));
+  PORTB=(PORTB&~(1<<0));}
+  _delay_ms(1000);}
+}

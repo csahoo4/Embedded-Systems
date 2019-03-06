@@ -1,0 +1,12 @@
+#include<avr/io.h>
+#include<uart.h>
+void main()
+{ int x;
+DDRB=0xff;
+uart_init();
+while(1)
+{ x=uart_rec();
+  PORTB=x;
+}
+}
+

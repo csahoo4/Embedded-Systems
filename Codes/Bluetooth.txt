@@ -1,0 +1,35 @@
+#include<avr/io.h>
+#include<util/delay.h>
+#include<lcd.h>
+#include<uart.h>
+void main()
+{ int x,i=0,j=0,g=0;
+  DDRC=0xff;
+  DDRB=0xff;
+  uart_init();
+  lcd_init();
+  while(1)
+  { x=uart_rec();
+    dis_cmd(0x86);
+	dis_data(x);
+	if(x=='F')
+	{ if(i%2==0)
+	  { PORTB|=(1<<0);
+	     i++;} 
+		  else
+		{ PORTB&=~(1<<0);
+		  i++;}
+		 }
+      else if(x=='B')
+      { if(j%2==0)
+	    { PORTB|=(1<<1);
+		  j++;}
+        else
+		{ PORTB&=~(1<<1);
+		  j++;}
+       }
+	   else
+	   { PORTB=0;
+       }
+   }
+ }

@@ -1,0 +1,29 @@
+#include<avr/io.h>
+#include<util/delay.h>
+#include<lcd.h>
+void main()
+{ DDRC=0xff;
+  DDRB=0xff;
+  DDRA=0;
+  PORTA=0b00000011;
+  lcd_init();
+  while(1)
+  { 
+	if((PINA&0b00000001)==0)
+	{ while((PINA&0b00000001)==0);
+	  dis_cmd(0x8f);
+	  dis_number(1);
+	   PORTB=0b00000001;
+	   _delay_ms(100);
+	   PORTB=0;
+	   }
+    if((PINA&0b00000010)==0)
+	{ while((PINA&0b00000010)==0);
+	   dis_cmd(0x8f);
+	   dis_number(2);
+	   PORTB=0b00000010;
+	   _delay_ms(100);
+	   PORTB=0;
+       }
+   }
+ }

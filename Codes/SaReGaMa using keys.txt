@@ -1,0 +1,49 @@
+#include<avr/io.h>
+#include<util/delay.h>
+#include<lcd.h>
+#include<avr/interrupt.h>
+#include<timer.h>
+void main()
+{  DDRA=0b00000000;
+   DDRD=0b00001111;
+   int x;   
+   while(1)
+   { x=key();
+     if(x==0)
+     { timer_ctc_init(); //using here prescalar=64 
+	  OCR0=31;
+     _delay_ms(1000);
+	  TCCR0=0;}
+	 if(x==1)
+     { timer_ctc_init(); //using here prescalar=64 
+	 OCR0=27;
+     _delay_ms(1000);
+	 TCCR0=0;}
+	 if(x==2)
+     { timer_ctc_init(); //using here prescalar=64 
+	 OCR0=25;
+     _delay_ms(1000);
+	 TCCR0=0;}
+	 if(x==3)
+     { timer_ctc_init(); //using here prescalar=64 
+	  OCR0=23;
+     _delay_ms(1000);
+	 TCCR0=0;}
+	 if(x==4)
+     { timer_ctc_init(); //using here prescalar=64 
+	  OCR0=20;
+     _delay_ms(1000);
+	 TCCR0=0;}
+	 if(x==5)
+     { timer_ctc_init(); //using here prescalar=64 
+	  OCR0=18;
+     _delay_ms(1000);
+	 TCCR0=0;}
+	 if(x==6)
+     {timer_ctc_init();  //using here prescalar=64 
+	  OCR0=16;
+     _delay_ms(1000);
+	 TCCR0=0;}
+     
+	 }
+}

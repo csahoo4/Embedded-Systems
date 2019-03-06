@@ -1,0 +1,19 @@
+#include<avr/io.h>
+#include<avr/interrupt.h>
+#include<timer.h>
+int count=0;
+ISR(TIMER0_OVF_vect)
+{ count++;
+  if(count==490)
+  { PORTB=~(PORTB);
+    count=0;
+	}
+}
+void main()
+{ DDRB=0b11111111;
+  sei();
+  timer_normal_init();
+  while(1)
+  {
+  }
+}

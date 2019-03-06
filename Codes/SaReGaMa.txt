@@ -1,0 +1,24 @@
+#include<avr/io.h>
+#include<util/delay.h>
+#include<avr/interrupt.h>
+#include<timer.h>
+void main()
+{ 
+   timer_ctc_init();    //using here prescalar=64 
+   while(1)
+   { OCR0=31;
+     _delay_ms(1000);
+     OCR0=27;
+     _delay_ms(1000);
+	 OCR0=25;
+     _delay_ms(1000);
+	 OCR0=23;
+     _delay_ms(1000);
+	 OCR0=20;
+     _delay_ms(1000);
+	 OCR0=18;
+     _delay_ms(1000);
+	 OCR0=16;
+     _delay_ms(1000);
+	 }
+}

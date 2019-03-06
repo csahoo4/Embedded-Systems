@@ -1,0 +1,91 @@
+#include<avr/io.h>
+#include<util/delay.h>
+#include<lcd.h>
+void main()
+{int i;
+char b[]="Gun",c[]="Happy Harry",d[]="Sad Harry",e[]="Bullet";
+char a[]={72,69,76,76,79,87,69,76,67,79,77,69};
+DDRC=0b11111111;
+ lcd_init();
+ custom_char();
+ dis_cmd(0x85);
+ for(i=0;i<=4;i++)
+ { dis_data(a[i]);
+   _delay_ms(400);}
+   dis_data('!');
+   _delay_ms(400);
+   dis_cmd(0xc4);
+ for(i=5;i<=11;i++)
+ { dis_data(a[i]);
+   _delay_ms(400);}
+   dis_cmd(0x85);
+   dis_string("      ");
+   dis_cmd(0xc4);
+   dis_string("       ");
+   _delay_ms(1000);
+ dis_cmd(0x80);
+ dis_string("Please Wait");
+ dis_cmd(0xc0);
+ dis_string("Loading.... %");
+ for(i=1;i<=100;i++)
+ {dis_cmd(0xcb);
+ dis_number(i);
+  _delay_ms(100);}
+  _delay_ms(1200);
+ dis_cmd(0x80);
+ dis_string("           ");
+ dis_cmd(0xc0);
+ dis_string("                ");
+ _delay_ms(1000);
+ dis_cmd(0x81);
+ dis_string("-This is");
+ for(i=0;i<=3;i++)
+ { dis_cmd(0x80);
+   dis_data(i);
+   dis_cmd(0xc2);
+   if(i==0)
+   dis_string(b);
+   if(i==1)
+   dis_string(c);
+   if(i==2)
+   dis_string(d);  
+   if(i==3)
+   dis_string(e);
+   _delay_ms(4000);
+   dis_cmd(0xc2);
+   dis_string("            ");
+   dis_cmd(0x80);
+   dis_data(' ');}
+ dis_cmd(0x80);
+ dis_string("          ");
+ dis_cmd(0x80);
+ dis_string("Loading");
+ dis_cmd(0xc0);
+ dis_string("Animation..... %");
+ for(i=1;i<=100;i++)
+ {dis_cmd(0xce);
+ dis_number(i);
+  _delay_ms(200);}
+  _delay_ms(1200);
+ dis_cmd(0x80);
+ dis_string("       ");
+ dis_cmd(0xc0);
+ dis_string("                ");
+ _delay_ms(1000);
+ while(1)
+  {dis_cmd(0x8f);
+   dis_data(1);
+   dis_cmd(0x80);
+   dis_data(0);
+   _delay_ms(1000);
+  for(i=0x81;i<=0x8e;++i)
+   {dis_cmd(i);
+   dis_data(3);
+   _delay_ms(100);
+   dis_cmd(i);
+   dis_data(' ');}
+   i=0x81;
+   dis_cmd(0x8f);
+   dis_data(2);
+   _delay_ms(900);}
+}

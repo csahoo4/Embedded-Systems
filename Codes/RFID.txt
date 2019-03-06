@@ -1,0 +1,41 @@
+#include<avr/io.h>
+#include<avr/interrupt.h>
+#include<util/delay.h>
+#include<lcd.h>
+#include<uart.h>
+char a[];
+int i=0;
+ISR(USART_RXC_vect)
+{a[i]=UDR;
+ i++;
+}
+void main()
+{ char b[]="CHIRANJEEBSA";
+int h,l=0; 
+DDRC=0xff;
+sei();
+uart_init();
+lcd_init();
+UCSRB|=(1<<RXCIE);
+while(1)
+{  dis_cmd(0xcf);
+   dis_data(' ');
+   if(i==12)
+  { i=0;
+    for(h=0;b[h]!='\0';h++)
+	if(b[h]!=a[h])
+	l=1;
+	  if(l==0)
+	  {dis_cmd(0x80);
+      dis_string("WELCOME");}
+	  else
+	  {dis_cmd(0x80);
+       dis_string("WRONG");
+	   l=0;
+	  }
+   _delay_ms(2000);
+   dis_cmd(1);
+   _delay_ms(1);
+  }
+}
+}

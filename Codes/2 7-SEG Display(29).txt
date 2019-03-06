@@ -1,0 +1,17 @@
+#include<avr/io.h>
+#include<util/delay.h>
+void main()
+{ int d[]={0b01011011,0b01101111};
+DDRB=0b11111111;
+DDRA=0b11111111;
+while(1)
+{
+PORTA=0b00000010;
+PORTB=d[0];
+_delay_ms(0.8);
+PORTA=0b00000001;
+PORTB=d[1];
+_delay_ms(0.8);
+}
+}
+  

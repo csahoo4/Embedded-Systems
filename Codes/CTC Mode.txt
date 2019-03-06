@@ -1,0 +1,14 @@
+#include<avr/io.h>
+#include<avr/interrupt.h>
+#include<util/delay.h>
+#include<timer.h>
+void main()
+{ sei();
+  timer_ctc_init();
+  while(1)
+  { OCR0=50;
+    _delay_ms(2000);
+	OCR0=150;
+	_delay_ms(2000);
+}
+}

@@ -1,0 +1,18 @@
+#include<avr/io.h>
+#include<util/delay.h>
+#include<lcd.h>
+void main()
+{int i=0;
+DDRC=0b11111111;
+ lcd_init();
+ 
+ while(1)
+ { dis_cmd(0x8f);
+   dis_number(i++);
+   _delay_ms(200);
+   if(i==60)
+   {i=0;
+     dis_cmd(0x8e);
+	 dis_data(' ');}
+}
+}

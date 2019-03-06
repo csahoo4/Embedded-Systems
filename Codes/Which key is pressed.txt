@@ -1,0 +1,23 @@
+#include<avr/io.h>
+#include<util/delay.h>
+#include<lcd.h>
+void main()
+{ int g,x;
+  DDRD=0b11111111;
+  DDRC=0b11111111;
+  DDRA=0b00000000;
+  PORTA=0b00001111;
+  DDRB=0b11111111;
+  lcd_init();
+  while(1)
+  { 
+    x=key();
+	PORTB=x;
+	dis_cmd(0x8f);
+	g=x+1;
+	dis_number(g);
+	if(g<10)
+	dis_cmd(0x8e);
+	dis_string(" ");
+	}
+}

@@ -1,0 +1,19 @@
+#include<avr/io.h>
+#include<util/delay.h>
+#include<math.h>
+void main()
+{ int i,f;
+  char c=y;
+DDRB=0b11111111;
+while(1)
+{ i=4;
+  f=3;
+  while(i!=8)
+  { PORTB=pow(2,i)+pow(2,f);
+    _delay_ms(1000);
+    i++;
+    f--;
+  }
+}
+}
+  

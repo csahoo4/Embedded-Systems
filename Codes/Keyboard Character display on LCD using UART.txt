@@ -1,0 +1,46 @@
+#include<avr/io.h>
+#include<util/delay.h>
+#include<lcd.h>
+#include<uart.h>
+void main()
+{ int x,z=0,m=0,n=0,i=0x80;
+DDRC=0xff;
+DDRB=0xff;
+uart_init();
+lcd_init();
+while(1)
+{ x=uart_rec();
+  dis_cmd(i);
+  dis_data(x);
+  i++;
+  if(i==0x90)
+  i=0xc0;
+  if(i==0xd0)
+  { i=0x80;
+    _delay_ms(1000);
+    dis_cmd(1);
+	_delay_ms(1);}
+  if(x=='A')
+  { if(z%2==0)
+  { PORTB|=(1<<0);
+	z++;}
+  else
+  { PORTB&=~(1<<0);
+    z++;}}
+  if(x=='B')
+  {if(m%2==0)
+  { PORTB|=(1<<1);
+	m++;}
+  else
+  { PORTB&=~(1<<1);
+    m++;}}
+	if(x=='C')
+  {if(n%2==0)
+  { PORTB|=(1<<2);
+	n++;}
+  else
+  { PORTB&=~(1<<2);
+    n++;}}
+}
+}
+

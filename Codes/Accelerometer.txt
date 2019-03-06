@@ -1,0 +1,23 @@
+#include<avr/io.h>
+#include<util/delay.h>
+#include<lcd.h>
+void main()
+{ int x,y,z;
+DDRC=0xff;
+adc_init();
+lcd_init();
+while(1)
+{ x=adc_read(0);
+  y=adc_read(1);
+  z=adc_read(2);
+  dis_cmd(0x8f);
+  dis_number(x);
+  dis_cmd(0xcf);
+  dis_number(y);
+  dis_cmd(0x83);
+  dis_number(z);
+  _delay_ms(500);
+  dis_cmd(1);
+  _delay_ms(1);
+  }
+}

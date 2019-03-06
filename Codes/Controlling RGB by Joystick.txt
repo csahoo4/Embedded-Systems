@@ -1,0 +1,16 @@
+#include<avr/io.h>
+#include<avr/interrupt.h>
+#include<util/delay.h>
+#include<lcd.h>
+#include<timer.h>
+void main()
+{ int x;
+timer2_fastpwm_init();
+timer0_fastpwm_init();
+adc_init();
+while(1)
+{ x=adc_read(0); 
+  OCR2=x/4;
+  OCR0=x/4;
+}
+}
